@@ -1,0 +1,22 @@
+{
+  "name": "node-red-contrib-firebase-storage",
+  "version": "0.0.1",
+  "description": "Util nodes to manage files stored in Firebase Object Storage",
+  "node-red": {
+    "nodes": {
+      "upload": "upload.js"
+    }
+  },
+  "keywords": [
+    "nodered",
+    "firebase",
+    "storage",
+    "upload",
+    "download"
+  ],
+  "author": "Ewa Wojtach",
+  "license": "MIT 2.0",
+  "dependencies": {
+    "firebase": "^4.13.1"
+  }
+}
