@@ -1,0 +1,37 @@
+<script type="text/javascript">
+    RED.nodes.registerType('config-firebase', {
+        category: "config",
+        defaults: {
+          apikey: {value: ""},
+          authdomain: {value: ""},
+          bucket: {value: ""},
+          project: {value: ""},
+        },
+        label: function() {
+            return this.project+"-firebase-config";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="config-firebase">
+    <div class="form-row">
+        <label for="node-config-input-project"><i class="icon-tag"></i> Firebase Project</label>
+        <input type="text" id="node-config-input-project" placeholder="Firebase Project Id">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-apikey"><i class="icon-tag"></i> API Key</label>
+        <input type="text" id="node-config-input-apikey" placeholder="API Key">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-authdomain"><i class="icon-tag"></i> Auth domain</label>
+        <input type="text" id="node-config-input-authdomain" placeholder="Auth domain">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-bucket"><i class="icon-tag"></i> Storage Bucket</label>
+        <input type="text" id="node-config-input-bucket" placeholder="Storage Bucket">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="config-firebase">
+    <p>Configuration of firebase storage</p>
+</script>

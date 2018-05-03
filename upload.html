@@ -1,16 +1,19 @@
 <script type="text/javascript">
     RED.nodes.registerType('upload-to-firebase',{
-        category: 'function',
-        color: '#a6bbcf',
+        category: "storage",
+        color: "#FFAAAA",
         defaults: {
-            name: {value:""}
+          server: {value:"", type:"config-firebase"},
+            name: {value:""},
+            folder: {value:""},
         },
         inputs:1,
         outputs:1,
-        icon: "file.png",
+        icon: "db.png",
         label: function() {
             return this.name||"upload-to-firebase";
-        }
+        },
+        paletteLabel: "firebase upload"
     });
 </script>
 
@@ -20,20 +23,8 @@
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-projectId"><i class="icon-tag"></i> Firebase Project Id</label>
-        <input type="text" id="node-input-project" placeholder="Firebase Project Id">
-    </div>
-    <div class="form-row">
-        <label for="node-input-key"><i class="icon-tag"></i> API Key</label>
-        <input type="text" id="node-input-key" placeholder="API Key">
-    </div>
-    <div class="form-row">
-        <label for="node-input-authdomain"><i class="icon-tag"></i> Auth domain</label>
-        <input type="text" id="node-input-authdomain" placeholder="Auth domain">
-    </div>
-    <div class="form-row">
-        <label for="node-input-bucket"><i class="icon-tag"></i> Storage Bucket</label>
-        <input type="text" id="node-input-bucket" placeholder="Storage Bucket">
+        <label for="node-input-server"><i class="icon-tag"></i> Firebase Configuration</label>
+        <input type="select" id="node-input-server" placeholder="Configuration">
     </div>
     <div class="form-row">
         <label for="node-input-folder"><i class="icon-tag"></i> Folder</label>
@@ -41,6 +32,18 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="lower-case">
-    <p>Node uploading file from payload.attachements into firebase storage</p>
+<script type="text/x-red" data-help-name="upload-to-firebase">
+    <p>Node uploading files from msg.attachments into firebase storage</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd> the metadata of the files to be stored. </dd>
+        <dt>attachments <span class="property-type">array</span></dt>
+        <dd> Array of file descrition objects to be stored in Firebase bucket.
+            Each attachment should contain at least <code>fileName</code> and <code>content</code> properties.
+        </dd>
+    </dl>
 </script>
