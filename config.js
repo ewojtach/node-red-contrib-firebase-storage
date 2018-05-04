@@ -23,6 +23,7 @@ module.exports = function(RED) {
     }
 
     this.storageRef = firebase.storage().ref();
+    node.log("connection to firebase initialized");
   }
 
   RED.nodes.registerType("config-firebase", ConfigFirebaseNode);

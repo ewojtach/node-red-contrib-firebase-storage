@@ -24,18 +24,33 @@ module.exports = function(RED) {
                 //todo: add image metadata
                 var file = msg.attachments[0].content;
                 var fileName = msg.attachments[0].fileName;
+                var fileContentType = msg.attachments[0].contentType;
+
+                var metadata = {
+                  contentType: fileContentType,
+                };
 
                 var uploadRef = imagesRef.child(fileName);
-                uploadRef.put(file).then(function(snapshot) {
-                  node.status({fill:"green",shape:"dot",text:"connected"});
-                });
-              }
+                var uploadTask = uploadRef.put(file, metadata);
 
-              //todo: return image reference
-              node.send(msg);
+                uploadTask.on("state_changed",
+                  function(snapshot) {
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    node.log("Upload is " + progress + '% done');
+                  }, function(error) {
+                    node.error("Upload failed: " + error.code);
+                    node.status({fill: "red", shape: "ring", text: "upload failed"});
+                  }, function() {
+                    var downloadURL = uploadTask.snapshot.downloadURL;
+                    node.log("Download url:" + downloadURL);
+                    node.status({fill:"green", shape:"dot", text:"connected"});
+                    msg.downloadUrl = downloadURL;
+                    node.send(msg);
+                  });
+              }
             } else {
-              this.log("No config node configured")
-              node.status({fill:"red",shape:"ring",text:"disconnected"});
+              node.error("Config node not filled with Firebase account data")
+              node.status({fill:"red", shape:"ring", text:"disconnected"});
             }
         });
 
