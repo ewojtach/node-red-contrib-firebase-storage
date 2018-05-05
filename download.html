@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('upload-to-firebase',{
+    RED.nodes.registerType('download-from-firebase',{
         category: "storage",
         color: "#FFAAAA",
         defaults: {
@@ -11,13 +11,13 @@
         outputs:1,
         icon: "db.png",
         label: function() {
-            return this.name||"upload-to-firebase";
+            return this.name||"download-from-firebase";
         },
-        paletteLabel: "firebase upload"
+        paletteLabel: "firebase download"
     });
 </script>
 
-<script type="text/x-red" data-template-name="upload-to-firebase">
+<script type="text/x-red" data-template-name="download-from-firebase">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -32,15 +32,15 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="upload-to-firebase">
-    <p>Node uploading files from msg.attachments into Google Firebase storage</p>
+<script type="text/x-red" data-help-name="download-from-firebase">
+    <p>Node downloading files from msg.fileName from firebase storage</p>
 
     <h3>Inputs</h3>
     <dl class="message-properties">
-        <dt>attachments <span class="property-type">array</span></dt>
-        <dd> Array of file descrition objects to be stored in Firebase bucket.
-            Each attachment should contain at least <code>fileName</code>, <code>contentType</code> and <code>content</code> properties.
-        </dd>
+        <dt>msg.fileName
+            <span class="property-type">string</span>
+        </dt>
+        <dd>name of file to be downloaded</dd>
     </dl>
     <h3>Outputs</h3>
     <ol class="node-ports">
