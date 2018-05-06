@@ -13,11 +13,17 @@ npm install node-red-contrib-firebase-storage
 Usage
 -----
 **Firebase Upload**
-`msg.payload` is used as metadata of the files to be stored.
-`msg.attachments` Array of file descrition objects to be stored in Firebase bucket.
-    Each attachment should contain at least ```fileName``` and ```content``` properties.
+Node allows uploading files to Google Firebase File Storage.
+Input param is `msg.attachments` - array of file description objects to be stored in Firebase bucket.
+Each attachment should contain at least ```fileName``` , ```content``` and ```contentType``` properties.
+Node output contains `msg.downloadUrl` - download URL for uploaded file.
+
+**Firebase Download**
+Node allows resolving file name to download URL.
+Input param is `msg.fileName` - download file name. Node output contains `msg.downloadUrl` - download URL for file.
 
 **Firebase configuration properties**
 
-*Firebase Project* - ```projectId``` from Firebase config file.
-*API Key* - ```apiKey``` from Firebase config file.
+- *Firebase Project* - ```projectId``` from Firebase config file.
+- *API Key* - ```apiKey``` from Firebase config file.
+- *storageBucket* - ```storageBucket``` from Firebase config file, eg. "my-project.appspot.com".
